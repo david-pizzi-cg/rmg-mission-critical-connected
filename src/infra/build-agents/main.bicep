@@ -21,13 +21,14 @@ var default_tags = {
   Prefix: prefixsuffix
 }
 
+// nsgs
+/*
 resource nsg 'Microsoft.Network/networkSecurityGroups@2021-05-01' = {
   name: '${prefixsuffix}-default-nsg'
   location: location
   tags: default_tags
   properties: {}
 }
-
 resource bastionNsg 'Microsoft.Network/networkSecurityGroups@2021-05-01' = {
   name: '${prefixsuffix}-bastion-nsg'
   location: location
@@ -92,7 +93,11 @@ resource bastionNsg 'Microsoft.Network/networkSecurityGroups@2021-05-01' = {
     ]
   }
 }
+*/
 
+// VNet
+// https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/existing-resource
+/*
 resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
   name: '${prefixsuffix}-vnet'
   location: location
@@ -144,7 +149,14 @@ resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
     ]
   }
 }
+*/
 
+resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' existing = {
+  name: '${prefixsuffix}-vnet'
+}
+
+// Private links and DNS
+/*
 resource keyvaultPrivateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = {
   name: 'privatelink.vaultcore.azure.net'
   location: 'global'
@@ -224,7 +236,9 @@ resource tablePeVnetLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@
     }
   }
 }
+*/
 
+// VM Scale Sets
 resource buildagentsVmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
   name: '${prefixsuffix}-buildagents-vmss'
   location: location
@@ -359,6 +373,7 @@ resource jumpboxesVmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = 
   }
 }
 
+// Bastion
 resource bastionPip 'Microsoft.Network/publicIPAddresses@2021-05-01' = {
   name: '${prefixsuffix}-bastion-pip'
   location: location
