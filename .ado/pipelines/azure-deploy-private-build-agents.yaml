@@ -47,7 +47,7 @@ stages:
         scriptLocation: inlineScript
         inlineScript: |
 
-          $rgName = "$(prefix)-buildinfra-rg"
+          $rgName = "ado-ebiz-buildinfra-rg"
 
           $locations = '$(stampLocations)' | ConvertFrom-Json -NoEnumerate # get the stamp locations and use the first one to create the resource group there. The region does not really matter.
           $location = $locations[0]
