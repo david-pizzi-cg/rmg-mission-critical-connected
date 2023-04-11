@@ -7,7 +7,7 @@ param vmssAdminUsername string = 'alwayson'
 @secure()
 param vmssAdminPassword string
 
-var prefixsuffix = '${prefix}${suffix}'
+var prefixsuffix = 'ado-ebiz-buildinfra'
 
 var buildAgentSubnetName = 'buildagents-snet'
 var jumpserversSubnetName = 'jumpservers-snet'
